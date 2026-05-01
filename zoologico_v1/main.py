@@ -30,11 +30,11 @@ def main():
                 sistema.listar_tarefas()
 
             elif opcao == "0":
-                print("Encerrando o sistema...")
+                print("Encerrando...")
                 break
 
             else:
-                print("Opção inválida.")
+                print("Opção inválida")
 
         except SistemaZoologicoException as e:
             print(f"Erro do sistema: {e}")
@@ -45,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

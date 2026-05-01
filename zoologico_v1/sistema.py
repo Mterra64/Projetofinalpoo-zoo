@@ -1,3 +1,5 @@
+import json
+
 from models.mamifero import Mamifero
 from models.ave import Ave
 from models.reptil import Reptil
@@ -19,6 +21,34 @@ class SistemaZoologico:
         self.tratadores = []
         self.tarefas = []
 
+    # ---------------- SALVAR ---------------- #
+
+    def salvar_dados(self):
+        dados = {
+            "animais": [
+                {
+                    "nome": a.nome,
+                    "especie": a.especie,
+                    "status": a.status
+                }
+                for a in self.animais
+            ],
+            "tratadores": [
+                {
+                    "nome": t.nome,
+                    "setor": t.setor
+                }
+                for t in self.tratadores
+            ],
+            "tarefas": [
+                t.exibir_dados()
+                for t in self.tarefas
+            ]
+        }
+
+        with open("dados_zoo.json", "w") as f:
+            json.dump(dados, f, indent=4)
+
     # ---------------- ANIMAL ---------------- #
 
     def cadastrar_animal(self):
@@ -29,7 +59,7 @@ class SistemaZoologico:
         especie = input("Espécie: ")
         idade = input("Idade: ")
 
-        print("\nDestino do animal:")
+        print("\nDestino:")
         print("1 - Zoológico")
         print("2 - Reabilitação")
         destino = input("Escolha: ")
@@ -47,11 +77,15 @@ class SistemaZoologico:
             animal.iniciar_reabilitacao()
 
         self.animais.append(animal)
+        self.salvar_dados()
+
         print("✅ Animal cadastrado!")
 
     def listar_animais(self):
+        print("\n=== ANIMAIS ===")
+        print("ID | Nome | Espécie | Status")
         for i, a in enumerate(self.animais):
-            print(i, a.exibir_dados())
+            print(f"{i} | {a.nome} | {a.especie} | {a.status}")
 
     # ---------------- TRATADOR ---------------- #
 
@@ -71,11 +105,15 @@ class SistemaZoologico:
             t = TratadorReptil(nome, mat, setor)
 
         self.tratadores.append(t)
+        self.salvar_dados()
+
         print("✅ Tratador cadastrado!")
 
     def listar_tratadores(self):
+        print("\n=== TRATADORES ===")
+        print("ID | Nome | Setor | Matrícula")
         for i, t in enumerate(self.tratadores):
-            print(i, t.exibir_dados())
+            print(f"{i} | {t.nome} | {t.setor} | {t.matricula}")
 
     # ---------------- TAREFA ---------------- #
 
@@ -83,12 +121,12 @@ class SistemaZoologico:
 
         print("\nAnimais:")
         for i, a in enumerate(self.animais):
-            print(i, a.nome)
+            print(f"{i} - {a.nome}")
         animal = self.animais[int(input("Escolha: "))]
 
         print("\nTratadores:")
         for i, t in enumerate(self.tratadores):
-            print(i, t.nome)
+            print(f"{i} - {t.nome}")
         tratador = self.tratadores[int(input("Escolha: "))]
 
         print("\n1 Alimentação | 2 Limpeza | 3 Consulta | 4 Reabilitação")
@@ -106,8 +144,13 @@ class SistemaZoologico:
             return
 
         self.tarefas.append(tarefa)
+
         print("Resultado:", tarefa.executar())
+        self.salvar_dados()
 
     def listar_tarefas(self):
+        print("\n=== TAREFAS ===")
+        print("ID | Tratador | Animal | Tipo")
         for i, t in enumerate(self.tarefas):
-            print(i, t.exibir_dados())
+            print(f"{i} | {t.tratador.nome} | {t.animal.nome} | {t.__class__.__name__}")
+            
