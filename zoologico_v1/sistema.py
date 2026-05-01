@@ -6,11 +6,11 @@ from models.tratador_mamiferos import TratadorMamiferos
 from models.tratador_aves import TratadorAves
 from models.tratador_reptil import TratadorReptil
 
-from models.tarefa import Tarefa
 from models.alimentacao import Alimentacao
 from models.limpeza_habitat import LimpezaHabitat
 from models.consulta_veterinaria import ConsultaVeterinaria
 from models.reabilitacao import Reabilitacao
+
 
 class SistemaZoologico:
 
@@ -19,6 +19,8 @@ class SistemaZoologico:
         self.tratadores = []
         self.tarefas = []
 
+    # ---------------- ANIMAL ---------------- #
+
     def cadastrar_animal(self):
         print("\n1 Mamífero | 2 Ave | 3 Réptil")
         tipo = input("Tipo: ")
@@ -26,6 +28,11 @@ class SistemaZoologico:
         nome = input("Nome: ")
         especie = input("Espécie: ")
         idade = input("Idade: ")
+
+        print("\nDestino do animal:")
+        print("1 - Zoológico")
+        print("2 - Reabilitação")
+        destino = input("Escolha: ")
 
         if tipo == "1":
             animal = Mamifero(nome, especie, idade, input("Pelo: "))
@@ -36,12 +43,17 @@ class SistemaZoologico:
         else:
             return
 
+        if destino == "2":
+            animal.iniciar_reabilitacao()
+
         self.animais.append(animal)
-        print("Animal cadastrado!")
+        print("✅ Animal cadastrado!")
 
     def listar_animais(self):
         for i, a in enumerate(self.animais):
             print(i, a.exibir_dados())
+
+    # ---------------- TRATADOR ---------------- #
 
     def cadastrar_tratador(self):
         print("\n1 Mamíferos | 2 Aves | 3 Répteis")
@@ -59,11 +71,13 @@ class SistemaZoologico:
             t = TratadorReptil(nome, mat, setor)
 
         self.tratadores.append(t)
-        print("Tratador cadastrado!")
+        print("✅ Tratador cadastrado!")
 
     def listar_tratadores(self):
         for i, t in enumerate(self.tratadores):
             print(i, t.exibir_dados())
+
+    # ---------------- TAREFA ---------------- #
 
     def registrar_tarefa(self):
 
@@ -92,11 +106,8 @@ class SistemaZoologico:
             return
 
         self.tarefas.append(tarefa)
-
-        # 🔥 EXECUTA NA HORA
         print("Resultado:", tarefa.executar())
 
     def listar_tarefas(self):
         for i, t in enumerate(self.tarefas):
             print(i, t.exibir_dados())
-            

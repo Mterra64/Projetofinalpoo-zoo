@@ -26,7 +26,7 @@ class Animal(ABC):
         return f"{self.nome} em reabilitação {self.progresso}%"
 
     def exibir_dados(self):
-        return f"{self.nome} ({self.especie})"
+        return f"{self.nome} ({self.especie}) - Status: {self.status}"
 
     @abstractmethod
     def alimentar(self):
