@@ -1,13 +1,13 @@
-from models.tarefa import Tarefa
-
-
-class Alimentacao(Tarefa):
+class Alimentacao:
     def __init__(self, animal, tratador, horario):
-        super().__init__("Alimentação", animal, tratador)
+        self.animal = animal
+        self.tratador = tratador
         self.horario = horario
 
-    def exibir_dados(self):
-        return f"{super().exibir_dados()} | Horário: {self.horario}"
-
     def executar(self):
-        return f"{self.tratador.nome} alimentou {self.animal.nome} às {self.horario}"
+        return self.animal.alimentar()
+
+    def exibir_dados(self):
+        return f"{self.tratador.nome} alimentou {self.animal.nome}"
+
+        

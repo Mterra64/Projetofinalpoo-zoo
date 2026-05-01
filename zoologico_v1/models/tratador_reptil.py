@@ -1,6 +1,6 @@
 from models.tratador import Tratador
 
-class TratadorMamiferos(Tratador):
+class TratadorReptil(Tratador):
     pass
 
     

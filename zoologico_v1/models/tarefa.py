@@ -1,14 +1,11 @@
 class Tarefa:
-    def __init__(self, tipo, animal, tratador):
-        self.tipo = tipo
+    def __init__(self, descricao, animal, tratador):
+        self.descricao = descricao
         self.animal = animal
         self.tratador = tratador
 
     def exibir_dados(self):
-        return (
-            f"Tarefa: {self.tipo} | Animal: {self.animal.nome} | "
-            f"Tratador: {self.tratador.nome}"
-        )
+        return f"{self.descricao} - {self.animal.nome}"
 
-    def executar(self):
-        return f"Executando tarefa: {self.tipo}"
+
+        
