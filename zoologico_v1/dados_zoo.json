@@ -3,18 +3,21 @@
         {
             "nome": "Bina",
             "especie": "Canina",
+            "idade": "1 ano",
             "status": "reabilitacao",
             "tipo": "Mamifero"
         },
         {
-            "nome": "Fenix",
+            "nome": "Fogueira",
             "especie": "Fenix",
+            "idade": "2 anos",
             "status": "reabilitacao",
             "tipo": "Ave"
         },
         {
             "nome": "Julia",
             "especie": "Naja",
+            "idade": "1 ano",
             "status": "zoologico",
             "tipo": "Reptil"
         }
@@ -46,7 +49,7 @@
             "tipo": "Alimentacao"
         },
         {
-            "animal": "Fenix",
+            "animal": "Fogueira",
             "tratador": "Ana Fogo",
             "tipo": "LimpezaHabitat"
         },
