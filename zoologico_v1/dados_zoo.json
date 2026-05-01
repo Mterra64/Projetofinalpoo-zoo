@@ -1,0 +1,34 @@
+{
+    "animais": [
+        {
+            "nome": "Bino",
+            "especie": "Pica-pau",
+            "status": "reabilitacao"
+        },
+        {
+            "nome": "Bina",
+            "especie": "Canina",
+            "status": "zoologico"
+        },
+        {
+            "nome": "Jade",
+            "especie": "Coral",
+            "status": "reabilitacao"
+        }
+    ],
+    "tratadores": [
+        {
+            "nome": "Beto",
+            "setor": "Mamiferos"
+        },
+        {
+            "nome": "Ana",
+            "setor": "Aves"
+        },
+        {
+            "nome": "Petra",
+            "setor": "reptil"
+        }
+    ],
+    "tarefas": []
+}
