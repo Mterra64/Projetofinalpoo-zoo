@@ -20,26 +20,83 @@ class SistemaZoologico:
         self.animais = []
         self.tratadores = []
         self.tarefas = []
+        self.carregar_dados()
 
     # ---------------- SALVAR ---------------- #
 
     def salvar_dados(self):
         dados = {
             "animais": [
-                {"nome": a.nome, "especie": a.especie, "status": a.status}
+                {
+                    "nome": a.nome,
+                    "especie": a.especie,
+                    "status": a.status,
+                    "tipo": a.__class__.__name__
+                }
                 for a in self.animais
             ],
             "tratadores": [
-                {"nome": t.nome, "setor": t.setor, "matricula": t.matricula}
+                {
+                    "nome": t.nome,
+                    "setor": t.setor,
+                    "matricula": t.matricula,
+                    "tipo": t.__class__.__name__
+                }
                 for t in self.tratadores
             ],
             "tarefas": [
-                t.exibir_dados() for t in self.tarefas
+                {
+                    "animal": t.animal.nome,
+                    "tratador": t.tratador.nome,
+                    "tipo": t.__class__.__name__
+                }
+                for t in self.tarefas
             ]
         }
 
         with open("dados_zoo.json", "w") as f:
             json.dump(dados, f, indent=4)
+
+    # ---------------- CARREGAR ---------------- #
+
+    def carregar_dados(self):
+        try:
+            with open("dados_zoo.json", "r") as f:
+                dados = json.load(f)
+
+            # recriar animais
+            for a in dados.get("animais", []):
+                tipo = a.get("tipo")
+
+                if tipo == "Mamifero":
+                    animal = Mamifero(a["nome"], a["especie"], "0", "N/A")
+                elif tipo == "Ave":
+                    animal = Ave(a["nome"], a["especie"], "0", "N/A")
+                elif tipo == "Reptil":
+                    animal = Reptil(a["nome"], a["especie"], "0", "N/A")
+                else:
+                    continue
+
+                animal.status = a.get("status", "zoologico")
+                self.animais.append(animal)
+
+            # recriar tratadores
+            for t in dados.get("tratadores", []):
+                tipo = t.get("tipo")
+
+                if tipo == "TratadorMamiferos":
+                    tratador = TratadorMamiferos(t["nome"], t["matricula"], t["setor"])
+                elif tipo == "TratadorAves":
+                    tratador = TratadorAves(t["nome"], t["matricula"], t["setor"])
+                else:
+                    tratador = TratadorReptil(t["nome"], t["matricula"], t["setor"])
+
+                self.tratadores.append(tratador)
+
+            print("📂 Dados carregados com sucesso!")
+
+        except FileNotFoundError:
+            print("Nenhum arquivo de dados encontrado")
 
     # ---------------- ANIMAIS ---------------- #
 
@@ -169,4 +226,3 @@ class SistemaZoologico:
         print("ID | Tratador | Animal | Tipo")
         for i, t in enumerate(self.tarefas, start=1):
             print(f"{i} | {t.tratador.nome} | {t.animal.nome} | {t.__class__.__name__}")
-            
