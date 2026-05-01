@@ -1,34 +1,41 @@
 {
     "animais": [
         {
-            "nome": "Bino",
-            "especie": "Pica-pau",
-            "status": "reabilitacao"
-        },
-        {
             "nome": "Bina",
             "especie": "Canina",
-            "status": "zoologico"
+            "status": "reabilitacao"
         },
         {
-            "nome": "Jade",
-            "especie": "Coral",
+            "nome": "Fogueira",
+            "especie": "Fenix",
             "status": "reabilitacao"
+        },
+        {
+            "nome": "Julia",
+            "especie": "Naja",
+            "status": "zoologico"
         }
     ],
     "tratadores": [
         {
-            "nome": "Beto",
-            "setor": "Mamiferos"
+            "nome": "Dino Tavares",
+            "setor": "Mamiferos terra",
+            "matricula": "123654"
         },
         {
-            "nome": "Ana",
-            "setor": "Aves"
+            "nome": "Ana Fogo",
+            "setor": "Aves Raras",
+            "matricula": "123876"
         },
         {
-            "nome": "Petra",
-            "setor": "reptil"
+            "nome": "Davi",
+            "setor": "Cobras perigosas",
+            "matricula": "123987"
         }
     ],
-    "tarefas": []
+    "tarefas": [
+        "Dino Tavares alimentou Bina",
+        "Fogueira em reabilita\u00e7\u00e3o",
+        "Davi limpou Julia"
+    ]
 }
